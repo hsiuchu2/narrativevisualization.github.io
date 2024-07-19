@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Using D3.js in Existing HTML File</title>
+    <!-- Include D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Load d3-annotation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Your existing HTML content -->
+    <h1>Relationship between US Home value- Household income (2000~2019)</h1>
+    <div class="button-container">
+        <button id="year2000">2000</button>
+        <button id="year2005">2005</button>
+        <button id="year2010">2010</button>
+        <button id="extraYears">2015-2019</button>
+        <select id="yearSelector" style="display: none;">
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+        </select>
+    </div>
+
+
+    <div id="scatterplot"></div>
+    <div class = "tooltip" id = "tooltip"></div>
+    <script src="script.js"></script>
+
+</body>
+</html>

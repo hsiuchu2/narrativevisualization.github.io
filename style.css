@@ -1,0 +1,50 @@
+
+#scatterplot{
+    border: 1px solid black;
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    display: inline-block;
+    visibility: visible;
+    width: 200px;
+    opacity: 0.5;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;        
+}
+
+.tooltip:hover .tooltip {
+visibility: visible;
+}
+
+.button-container{
+    margin-top: 10px;
+}
+
+.button-container.button{
+
+    background-color: gray;
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    display: inline-block; /* Make the buttons appear side by side */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 3px; /* Add some space around buttons */
+    border-radius: 12px; /* Rounded corners */
+  }
+  
+  button:hover {
+    background-color: darkgrey; /* Darker green on hover */
+  }
+  
+  #yearSelector {
+    display: inline-block;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    margin: 4px 2px;
+  }
