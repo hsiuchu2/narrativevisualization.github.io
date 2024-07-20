@@ -1,3 +1,7 @@
+let selectedYear = 2000;
+let selectedGroup = "All";
+let isGroupFiltered = false;
+
 const margin = {top: 40, right: 60, bottom: 60, left: 60},
       width = 800,
       height = 600;
@@ -95,7 +99,10 @@ Promise.all([
     .style("fill", "darkblue")
     .style("font-weight", "bold");
 
-  function updateChart(year) {
+  function updateChart(year, group, initialLoad = false) {
+    selectedYear = year;
+    selectedGroup = group;
+
     svg.selectAll("circle").remove();
     svg.select(".annotation-group").remove();
     svg.select(".annotation-group1").remove();
@@ -127,11 +134,14 @@ Promise.all([
     }
 
     const formatCurrency = d3.format("$,");
+    
+   
 
     // Filter out data points with 'zero' or 'NaN' in x or y values
     const filteredData = mergedData.filter(d => {
-      return d[yearKey] > 0 && !isNaN(d[yearKey]) && d[incomeKey] > 0 && !isNaN(d[incomeKey]);
-    });    
+        const validData = d[yearKey] > 0 && !isNaN(d[yearKey]) && d[incomeKey] > 0 && !isNaN(d[incomeKey]);
+        return validData && (group === "All" || d.group === group);
+      });
 
     svg.selectAll("circle")
       .data(filteredData)
@@ -161,6 +171,10 @@ Promise.all([
 
       watermark.text(`Year: ${year}`);
 
+      
+    
+
+    if (!isGroupFiltered || group === "All") { 
       // Find the state with the highest income
     const maxIncomeState = d3.max(mergedData, d => d[incomeKey]);
     const highestIncomeState = mergedData.find(d => d[incomeKey] === maxIncomeState);
@@ -227,31 +241,47 @@ Promise.all([
       .call(g=>g.select(".annotation-note-label")
       .attr("fill", "seagreen"));;
   }
-
-
+  }
   d3.select("#year2000").on("click", () => {
     d3.select("#yearSelector").style("display", "none");
-    updateChart(2000);
+    d3.select("#groupSelector").style("display", "none");
+    isGroupFiltered = false;
+    updateChart(2000, "All", false);
   });
+  
   d3.select("#year2005").on("click", () => {
     d3.select("#yearSelector").style("display", "none");
-    updateChart(2005);
+    d3.select("#groupSelector").style("display", "none");
+    isGroupFiltered = false;
+    updateChart(2005, "All", false);
   });
+  
   d3.select("#year2010").on("click", () => {
     d3.select("#yearSelector").style("display", "none");
-    updateChart(2010);
+    d3.select("#groupSelector").style("display", "none");
+    isGroupFiltered = false;
+    updateChart(2010, "All", false);
   });
+  
   d3.select("#extraYears").on("click", () => {
     d3.select("#yearSelector").style("display", "inline");
-    updateChart(parseInt(d3.select("#yearSelector").node().value));
+    d3.select("#groupSelector").style("display", "inline");
+    isGroupFiltered = false;
+    updateChart(parseInt(d3.select("#yearSelector").node().value), "All", true);
   });
-
+  
   d3.select("#yearSelector").on("change", function() {
-    updateChart(parseInt(this.value));
+    updateChart(parseInt(this.value), selectedGroup, false);
   });
+  
+  d3.select("#groupSelector").on("change", function() {
+    isGroupFiltered = true;
+    updateChart(selectedYear, this.value, false);
+  });
+  
+  // Initialize the chart with default values
+  updateChart(2000, "All", false);
 
-
-  updateChart(2000);  // Default view
 
   //legend
   const legend = svg.append("g")
