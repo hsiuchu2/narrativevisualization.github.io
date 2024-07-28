@@ -183,8 +183,8 @@ Promise.all([
     const annotations = [
       {
         note: {
-          label: `${highestIncomeState.RegionName} has the highest income of ${formatCurrency(highestIncomeState[incomeKey])}`,
-          title: "Highest Income State",
+          label: `${highestIncomeState.RegionName} has the highest median income of ${formatCurrency(highestIncomeState[incomeKey])}`,
+          title: "Highest Median Income State",
           align: "middle",
           wrap: 200
         },
@@ -216,8 +216,8 @@ Promise.all([
     const higesthomevalueannotations = [
       {
         note: {
-          label: `${highestHomevalueState.RegionName} has the highest homevalue of ${formatCurrency(parseInt(highestHomevalueState[yearKey]))}`,
-          title: "Highest Home Value State",
+          label: `${highestHomevalueState.RegionName} has the highest typical homevalue of ${formatCurrency(parseInt(highestHomevalueState[yearKey]))}`,
+          title: "Highest Typical Home Value State",
           align: "middle",
           wrap:150
         },
@@ -314,3 +314,4 @@ Promise.all([
 
 
 });
+x
