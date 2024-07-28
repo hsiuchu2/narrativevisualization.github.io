@@ -191,7 +191,7 @@ Promise.all([
         x: x(highestIncomeState[yearKey])+100,
         y: y(highestIncomeState[incomeKey]),
         dx: -100,
-        dy: -50
+        dy: -20
       }
     ];
 
